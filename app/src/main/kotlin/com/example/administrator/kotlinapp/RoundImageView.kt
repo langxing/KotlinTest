@@ -12,6 +12,7 @@ class RoundImageView : ImageView {
     private var size = 0
     private var mPaint : Paint ? = null
     constructor(context: Context) : super(context)
+
     init {
         initData()
     }
