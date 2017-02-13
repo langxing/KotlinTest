@@ -32,6 +32,9 @@ class RoundImageView : ImageView {
         mPaint!!.color = Color.GREEN
         mPaint!!.style = Paint.Style.STROKE
         mPaint!!.strokeWidth = 3.toFloat()
+
+
+
     }
 
     override fun onDraw(canvas: Canvas?) {
