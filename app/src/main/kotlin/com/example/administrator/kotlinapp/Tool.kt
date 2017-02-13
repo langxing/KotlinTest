@@ -11,16 +11,6 @@ import android.widget.Toast
  */
 
 /**
- * 获取屏幕宽度
- */
-fun Context.screenWidth() = resources.displayMetrics.widthPixels
-
-/**
- * 获取屏幕高度
- */
-fun Context.screenHeight() = resources.displayMetrics.heightPixels
-
-/**
  * 显示键盘
  */
 fun EditText.showSoftKeyboard() {
@@ -59,3 +49,13 @@ fun Context.showToastShort(message: String) {
 fun Context.showToastLong(message : String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
+
+/**
+ * 获取屏幕宽度
+ */
+fun Context.screenWidth() = resources.displayMetrics.widthPixels
+
+/**
+ * 获取屏幕高度
+ */
+fun Context.screenHeight() = resources.displayMetrics.heightPixels

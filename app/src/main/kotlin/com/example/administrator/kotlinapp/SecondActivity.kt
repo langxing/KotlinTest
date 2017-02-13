@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_second.*
+import org.jetbrains.anko.toast
 
 class SecondActivity : AppCompatActivity() {
 
@@ -25,5 +26,6 @@ class SecondActivity : AppCompatActivity() {
         text.setOnClickListener {
             edit_query.hideSoftKeyboard()
         }
+        toast("")
     }
 }
