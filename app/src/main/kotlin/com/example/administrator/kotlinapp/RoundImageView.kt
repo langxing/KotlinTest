@@ -15,8 +15,9 @@ class RoundImageView : ImageView {
     var viewHeight = 0
     var srcBitmap: Bitmap ? = null
     var viewType = 0
-    var TYPE_ROUND = 2
-    var TYPE_CIRCLE = 1
+    val TYPE_CIRCLE = 1
+    val TYPE_ROUND = 2
+    val TYPE_OVAL = 3
     var radious = 0
     var borderColor = 0
     var borderWidth = 0
@@ -33,6 +34,7 @@ class RoundImageView : ImageView {
     }
 
     fun updateByUrl(bitmap: Bitmap) {
+        if(bitmap == null) return
         srcBitmap = bitmap
         invalidate()
     }
@@ -92,6 +94,7 @@ class RoundImageView : ImageView {
         super.onDraw(canvas)
         if(srcBitmap == null) return
         canvas!!.drawBitmap(drawBitmap(srcBitmap!!), 0F, 0F, null)
+        if(viewType == TYPE_OVAL) return
         if(borderColor != 0 && borderWidth > 0) {
             var mPaint = Paint()
             mPaint.isAntiAlias = true
@@ -117,6 +120,9 @@ class RoundImageView : ImageView {
         if(viewType == TYPE_ROUND) {
             val rectF = RectF((borderWidth/2).toFloat(), (borderWidth/2).toFloat(), viewWidth.toFloat(), viewHeight.toFloat())
             mCanvas.drawRoundRect(rectF, radious.toFloat(), radious.toFloat(), mPaint)
+        } else if(viewType == TYPE_OVAL) {
+            val rectF = RectF(0F, 0F, viewWidth.toFloat(), viewHeight.toFloat())
+            mCanvas.drawOval(rectF, mPaint)
         } else {
             mCanvas.drawCircle((viewWidth / 2).toFloat(), (viewWidth / 2).toFloat(), (viewWidth / 2).toFloat(), mPaint)
         }
