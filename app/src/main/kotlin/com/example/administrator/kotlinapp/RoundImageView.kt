@@ -13,6 +13,8 @@ import com.example.administrator.kotlinapp.R
 
 /**
  * Created by chentao on 2017/2/13.
+ * kotlin中文教程
+ * https://github.com/huanglizhuo/kotlin-in-chinese
  */
 class RoundImageView : ImageView {
     var viewWidth = 0
@@ -37,13 +39,12 @@ class RoundImageView : ImageView {
         init(context, attributeSet, defstyle)
     }
 
-    fun setView(bitmap: Bitmap ? = null, url : String = "", resourceId : Int = 0) {
+    fun setView(url : String ? = "", resourceId : Int = 0, bitmap: Bitmap ? = null) {
         if(!TextUtils.isEmpty(url)) {
             Glide.with(context).load(url).asBitmap().into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
                     srcBitmap = resource
                 }
-
             })
         } else if(resourceId > 0) {
             srcBitmap = BitmapFactory.decodeResource(resources, resourceId)
@@ -109,37 +110,40 @@ class RoundImageView : ImageView {
         super.onDraw(canvas)
         if(srcBitmap == null) return
         canvas!!.drawBitmap(drawBitmap(srcBitmap!!), 0F, 0F, null)
-        if(viewType == TYPE_OVAL) return
+        //绘制外边框
         if(borderColor != 0 && borderWidth > 0) {
             var mPaint = Paint()
             mPaint.isAntiAlias = true
             mPaint!!.style = Paint.Style.STROKE
             mPaint!!.color = borderColor
             mPaint!!.strokeWidth = borderWidth.toFloat()
+            val rectf = RectF((borderWidth/2).toFloat(), (borderWidth/2).toFloat(), (viewWidth + borderWidth/2).toFloat(), (viewHeight + borderWidth/2).toFloat())
            if(viewType == TYPE_ROUND) {
-              val rectf = RectF((borderWidth/2).toFloat(), (borderWidth/2).toFloat(), (viewWidth - borderWidth/2).toFloat(),
-                      (viewHeight ).toFloat())
-              canvas.drawRoundRect(rectf, radious.toFloat(), radious.toFloat(), mPaint)
+              canvas.drawRoundRect(rectf, (radious + borderWidth/2).toFloat(), (radious + borderWidth/2).toFloat(), mPaint)
+           } else if(viewType == TYPE_OVAL) {
+               canvas.drawOval(rectf, mPaint)
            } else {
                canvas.drawCircle(((viewWidth ) / 2).toFloat(), ((viewWidth ) / 2).toFloat(),
-                       ((viewWidth - borderWidth) / 2).toFloat(), mPaint)
+                       ((viewWidth - borderWidth/2) / 2).toFloat(), mPaint)
            }
         }
     }
 
+    /**
+     * 根据view类型,分别绘制圆形、矩形、弧形
+     */
     fun drawBitmap(b: Bitmap) : Bitmap {
         var mPaint  = Paint()
         mPaint!!.isAntiAlias = true
         var bitmap = Bitmap.createBitmap(viewWidth, viewHeight, Bitmap.Config.ARGB_8888)
         val mCanvas = Canvas(bitmap)
+        val rectF = RectF((borderWidth).toFloat(), (borderWidth).toFloat(), viewWidth.toFloat(), viewHeight.toFloat())
         if(viewType == TYPE_ROUND) {
-            val rectF = RectF((borderWidth/2).toFloat(), (borderWidth/2).toFloat(), viewWidth.toFloat(), viewHeight.toFloat())
             mCanvas.drawRoundRect(rectF, radious.toFloat(), radious.toFloat(), mPaint)
         } else if(viewType == TYPE_OVAL) {
-            val rectF = RectF(0F, 0F, viewWidth.toFloat(), viewHeight.toFloat())
             mCanvas.drawOval(rectF, mPaint)
         } else {
-            mCanvas.drawCircle((viewWidth / 2).toFloat(), (viewWidth / 2).toFloat(), (viewWidth / 2).toFloat(), mPaint)
+            mCanvas.drawCircle((viewWidth / 2).toFloat(), (viewWidth / 2).toFloat(), ((viewWidth - borderWidth) / 2).toFloat(), mPaint)
         }
         mPaint!!.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
         mCanvas.drawBitmap(b, 0F, 0F, mPaint)

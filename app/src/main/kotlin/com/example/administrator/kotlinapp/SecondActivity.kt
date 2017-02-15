@@ -14,15 +14,12 @@ class SecondActivity : AppCompatActivity() {
         showCenterToast(screenWidth().toString())
         showToastLong(screenHeight().toString())
         edit_query.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
- /*           edit_query.isFocusable = true
-            edit_query.isFocusableInTouchMode = true
-            edit_query.requestFocus()
-            edit_query.findFocus()*/
             edit_query.showSoftKeyboard()
             true
         })
         text.setOnClickListener {
             edit_query.hideSoftKeyboard()
         }
+        image.setView("", R.mipmap.purse_index, null)
     }
 }
