@@ -39,19 +39,26 @@ class RoundImageView : ImageView {
         init(context, attributeSet, defstyle)
     }
 
-    fun setView(url : String ? = "", resourceId : Int = 0, bitmap: Bitmap ? = null) {
+    fun setView(resourceId: Int) {
+        if(resourceId > 0) {
+            val bitmap = BitmapFactory.decodeResource(resources, resourceId)
+            setView(bitmap)
+        }
+    }
+
+    fun setView(url: String) {
         if(!TextUtils.isEmpty(url)) {
             Glide.with(context).load(url).asBitmap().into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
-                    srcBitmap = resource
+                    setView(resource!!)
                 }
             })
-        } else if(resourceId > 0) {
-            srcBitmap = BitmapFactory.decodeResource(resources, resourceId)
-        } else if(bitmap != null) {
-            srcBitmap = bitmap
         }
-        if (srcBitmap == null) return
+    }
+
+    fun setView(bitmap: Bitmap) {
+        if (bitmap == null) return
+        srcBitmap = bitmap
         invalidate()
     }
 

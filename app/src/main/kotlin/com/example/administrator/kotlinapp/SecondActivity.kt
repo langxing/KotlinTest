@@ -20,6 +20,6 @@ class SecondActivity : AppCompatActivity() {
         text.setOnClickListener {
             edit_query.hideSoftKeyboard()
         }
-        image.setView("", R.mipmap.purse_index, null)
+        image.setView(R.mipmap.purse_index)
     }
 }
