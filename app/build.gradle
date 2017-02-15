@@ -36,6 +36,7 @@ dependencies {
     compile 'org.jetbrains.anko:anko-sdk15:0.8.2' // sdk19, sdk21, sdk23 are also available
     compile 'org.jetbrains.anko:anko-support-v4:0.8.2' // In case you need support-v4 bindings
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.8.2' // For appcompat-v7 bindings
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'io.realm:realm-android:0.87.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.1.1'

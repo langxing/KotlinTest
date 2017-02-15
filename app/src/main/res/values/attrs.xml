@@ -11,7 +11,7 @@
         <attr name="border_color" format="color" />
         <attr name="border_width" format="dimension" />
     </declare-styleable>
-    <declare-styleable name="RoundTextView">
+    <declare-styleable name="RoundButton">
         <attr name="type_view">
             <enum name="circle" value="1"/>
             <enum name="round" value="2"/>

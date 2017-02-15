@@ -2,6 +2,7 @@ package com.example.administrator.kotlinapp
 
 import android.content.Context
 import android.view.Gravity
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -14,6 +15,10 @@ import android.widget.Toast
  * 显示键盘
  */
 fun EditText.showSoftKeyboard() {
+    isFocusable = true
+    isFocusableInTouchMode = true
+    requestFocus()
+    findFocus()
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(this, InputMethodManager.RESULT_SHOWN)
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
@@ -25,6 +30,8 @@ fun EditText.showSoftKeyboard() {
 fun EditText.hideSoftKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+    (parent as View).isFocusableInTouchMode = true
+    clearFocus()
 }
 
 /**

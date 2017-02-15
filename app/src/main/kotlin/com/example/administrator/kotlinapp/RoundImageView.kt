@@ -3,8 +3,12 @@ package com.scrollerapplication
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.*
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.example.administrator.kotlinapp.R
 
 /**
@@ -33,9 +37,20 @@ class RoundImageView : ImageView {
         init(context, attributeSet, defstyle)
     }
 
-    fun updateByUrl(bitmap: Bitmap) {
-        if(bitmap == null) return
-        srcBitmap = bitmap
+    fun setView(bitmap: Bitmap ? = null, url : String = "", resourceId : Int = 0) {
+        if(!TextUtils.isEmpty(url)) {
+            Glide.with(context).load(url).asBitmap().into(object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                    srcBitmap = resource
+                }
+
+            })
+        } else if(resourceId > 0) {
+            srcBitmap = BitmapFactory.decodeResource(resources, resourceId)
+        } else if(bitmap != null) {
+            srcBitmap = bitmap
+        }
+        if (srcBitmap == null) return
         invalidate()
     }
 

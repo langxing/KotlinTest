@@ -13,7 +13,7 @@ import com.example.administrator.kotlinapp.R
 /**
  * Created by chentao on 2017/2/14.
  */
-class RoundTextView : Button {
+class RoundButton : Button {
     var viewType = 0
     val TYPE_CIRCLE = 1
     val TYPE_ROUND = 2
@@ -42,16 +42,16 @@ class RoundTextView : Button {
 
     @SuppressLint("NewApi")
     private fun  init(context: Context, attributeSet: AttributeSet? = null, defstyle: Int = 0) {
-        val arr = context.obtainStyledAttributes(attributeSet, R.styleable.RoundTextView,defstyle, 0)
-        viewType = arr.getInt(R.styleable.RoundTextView_type_view, TYPE_ROUND)
-        nomalColor = arr.getColor(R.styleable.RoundTextView_nomal_color, nomalColor)
-        selectColor = arr.getColor(R.styleable.RoundTextView_select_color, selectColor)
-        nomalTextColor = arr.getColor(R.styleable.RoundTextView_nomal_textcolor, nomalTextColor)
-        selectTextColor = arr.getColor(R.styleable.RoundTextView_select_textcolor, selectTextColor)
-        enabledColor = arr.getColor(R.styleable.RoundTextView_enabled_color, nomalColor)
-        pressedColor = arr.getColor(R.styleable.RoundTextView_pressed_color, nomalColor)
-        disabledColor = arr.getColor(R.styleable.RoundTextView_disabled_color, nomalColor)
-        radius = arr.getDimensionPixelSize(R.styleable.RoundTextView_viwe_radius, radius)
+        val arr = context.obtainStyledAttributes(attributeSet, R.styleable.RoundButton,defstyle, 0)
+        viewType = arr.getInt(R.styleable.RoundButton_type_view, TYPE_ROUND)
+        nomalColor = arr.getColor(R.styleable.RoundButton_nomal_color, nomalColor)
+        selectColor = arr.getColor(R.styleable.RoundButton_select_color, selectColor)
+        nomalTextColor = arr.getColor(R.styleable.RoundButton_nomal_textcolor, nomalTextColor)
+        selectTextColor = arr.getColor(R.styleable.RoundButton_select_textcolor, selectTextColor)
+        enabledColor = arr.getColor(R.styleable.RoundButton_enabled_color, nomalColor)
+        pressedColor = arr.getColor(R.styleable.RoundButton_pressed_color, nomalColor)
+        disabledColor = arr.getColor(R.styleable.RoundButton_disabled_color, nomalColor)
+        radius = arr.getDimensionPixelSize(R.styleable.RoundButton_viwe_radius, radius)
         background = null
         mPaint = Paint()
         mPaint!!.isAntiAlias = true
@@ -66,7 +66,7 @@ class RoundTextView : Button {
             canvas!!.drawOval(rectf, mPaint)
         } else if(viewType == TYPE_CIRCLE) {
             canvas!!.drawCircle((viewSize / 2).toFloat(), (viewSize / 2).toFloat(), (viewSize / 2).toFloat(), mPaint)
-        } else if(radius > 0) {
+        } else {
             canvas!!.drawRoundRect(rectf, radius.toFloat(), radius.toFloat(), mPaint)
         }
         super.onDraw(canvas)
