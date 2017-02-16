@@ -22,8 +22,6 @@
         <attr name="select_color" format="color"/>
         <attr name="nomal_textcolor" format="color"/>
         <attr name="select_textcolor" format="color"/>
-        <attr name="left_drawable_size" format="dimension"/>
-        <attr name="right_drawable_size" format="dimension"/>
         <attr name="enabled_color" format="color"/>
         <attr name="pressed_color" format="color"/>
         <attr name="disabled_color" format="color"/>

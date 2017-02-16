@@ -52,6 +52,7 @@ class RoundButton : Button {
         pressedColor = arr.getColor(R.styleable.RoundButton_pressed_color, nomalColor)
         disabledColor = arr.getColor(R.styleable.RoundButton_disabled_color, nomalColor)
         radius = arr.getDimensionPixelSize(R.styleable.RoundButton_viwe_radius, radius)
+
         background = null
         mPaint = Paint()
         mPaint!!.isAntiAlias = true
